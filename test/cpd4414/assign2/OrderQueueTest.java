@@ -69,14 +69,18 @@ public class OrderQueueTest {
     @Test
     public void testWhenCustomerDoesNotExistsThenThrowException() {
         OrderQueue orderQueue = new OrderQueue();
+        boolean thrown=false;
+        try{
         Order order = new Order("", "");
-        order.addPurchase(new Purchase("PROD0004", 450));
-        order.addPurchase(new Purchase("PROD0006", 250));
-        orderQueue.add(order);
-        
-        long expResult = new Date().getTime();
-        long result = order.getTimeReceived().getTime();
-        assertTrue(Math.abs(result - expResult) < 1000);
+        }
+        catch(Exception ex){
+            System.err.println("The customer does not exits ");    
+           thrown=true;
+        }
+        assertTrue(thrown);
+        /*long expResult = new Date().getTime();
+         result = order.getTimeReceived().getTime();
+        assertTrue(Math.abs(result - expResult) < 1000);*/
     }
     
 }
