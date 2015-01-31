@@ -79,6 +79,8 @@ public class OrderQueueTest {
         assertTrue(thrown);
 
     }
+    
+    
 
     @Test
     public void testWhenListofPurchaseDoesNotExistsThenThrowException() {
@@ -94,5 +96,21 @@ public class OrderQueueTest {
         }
         assertTrue(thrown);
 
+    }
+    
+     @Test
+    public void testReturnOrderWithEarliestTimeReceivedThatDoesNotHaveTimeProcessed() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase("PROD0014", 450));
+        order.addPurchase(new Purchase("PROD0016", 250));
+        orderQueue.add(order);
+        orderQueue.add(order);
+        Order neworder = orderQueue.nextOrder();
+
+        assertEquals(order, neworder);
+        
+        
+        
     }
 }
