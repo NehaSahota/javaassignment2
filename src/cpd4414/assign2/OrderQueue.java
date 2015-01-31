@@ -26,9 +26,10 @@ import java.util.Queue;
 public class OrderQueue {
 
     Queue<Order> orderQueue = new ArrayDeque<>();
+    Queue<Order> processQueue = new ArrayDeque<>();
 
     public void add(Order order) throws Exception {
-        if (order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()) {
+        if (order.getCustomerId().isEmpty() || order.getCustomerName().isEmpty()) {
             throw new custDoesNotExistsException("The customer does not exists");
         }
         if (order.getListOfPurchases().isEmpty()) {
@@ -44,22 +45,25 @@ public class OrderQueue {
 
     }
 
-//    public void processOrder(Order order) throws Exception {
-//
-//        if (order.getTimeReceived() == null) {
-//            throw new Exception("The order does not have time recieved ");
-//
-//        }
-//        
-//        else{
-//            for(Purchase product : order.getListOfPurchases()){
-//                int inventoryProdID = Inventory.getQuantityForId(product.getProductId());
-//                int orderProdID = product.getQuantity();
-//                if(inventoryProdID>)
-//                
-//            
-//            }
-//        }
-//
-//    }
+    public void processOrder(Order order) throws Exception {
+
+        if (order.getTimeReceived() == null) {
+            throw new Exception("The order does not have time recieved ");
+
+        }
+        for (Purchase product : order.getListOfPurchases()) {
+            int inventoryProdID = Inventory.getQuantityForId(product.getProductId());
+            int orderProdID = product.getQuantity();
+            if (orderProdID > inventoryProdID) {
+                throw new outOfStockException("The product is out of stock");
+
+            }
+
+        }
+
+        order.setTimeProcessed(new Date());
+        orderQueue.remove(order);
+        processQueue.add(order);
+
+    }
 }

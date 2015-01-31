@@ -136,14 +136,14 @@ public class OrderQueueTest {
     public void testWhenOrderHasTimeReceivedAndPurchaseInStockSetTimeProcessedToNow() throws Exception {
         OrderQueue orderQueue = new OrderQueue();
         Order order = new Order("CUST00001", "ABC Construction");
-        order.addPurchase(new Purchase(11, 450));
-        order.addPurchase(new Purchase(12, 250));
+        order.addPurchase(new Purchase(11, 4));
+        order.addPurchase(new Purchase(12, 2));
         orderQueue.add(order);
-        //orderQueue.process(order);
+        orderQueue.processOrder(order);
 
         Date expResult = new Date();
         Date result = order.getTimeProcessed();
-        assertEquals(expResult, order);
+        assertEquals(expResult, result);
 
     }
 
