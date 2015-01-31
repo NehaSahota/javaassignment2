@@ -105,7 +105,6 @@ public class OrderQueueTest {
         order.addPurchase(new Purchase("PROD0014", 450));
         order.addPurchase(new Purchase("PROD0016", 250));
         orderQueue.add(order);
-        orderQueue.add(order);
         Order neworder = orderQueue.nextOrder();
 
         assertEquals(order, neworder);
