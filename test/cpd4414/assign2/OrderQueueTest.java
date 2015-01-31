@@ -105,11 +105,37 @@ public class OrderQueueTest {
         order.addPurchase(new Purchase("PROD0014", 450));
         order.addPurchase(new Purchase("PROD0016", 250));
         orderQueue.add(order);
-        Order neworder = orderQueue.nextOrder();
+        
+         Order newOrder = new Order("CUST00002", "Sally's Construction");
+        newOrder.addPurchase(new Purchase("PROD0014", 50));
+        newOrder.addPurchase(new Purchase("PROD0016", 50));
+        orderQueue.add(newOrder);
+        
+        Order expResult = order;
+        Order result = orderQueue.nextOrder();
 
-        assertEquals(order, neworder);
+        assertEquals(expResult, order);
         
         
         
     }
+    
+//     @Test
+//    public void testReturnNullWhenNoOrderInTheSystem() throws Exception {
+//        OrderQueue orderQueue = new OrderQueue();
+//        
+//       
+//        String result = "";
+//        
+//        try {
+//            orderQueue.nextOrder();
+//        } catch (Exception e) {
+//            result = null;
+//        }
+//         Order expResult = null;
+//        assertEquals(expResult, result);
+//        
+//        
+//        
+//    }
 }
