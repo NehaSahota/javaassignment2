@@ -120,22 +120,25 @@ public class OrderQueueTest {
         
     }
     
-//     @Test
-//    public void testReturnNullWhenNoOrderInTheSystem() throws Exception {
-//        OrderQueue orderQueue = new OrderQueue();
-//        
-//       
-//        String result = "";
-//        
-//        try {
-//            orderQueue.nextOrder();
-//        } catch (Exception e) {
-//            result = null;
-//        }
-//         Order expResult = null;
-//        assertEquals(expResult, result);
-//        
-//        
-//        
-//    }
+     @Test
+    public void testReturnNullWhenNoOrderInTheSystem() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        
+       
+        String result = "";
+        
+        try {
+            orderQueue.nextOrder();
+        } catch (Exception e) {
+            result = null;
+        }
+         Order expResult = null;
+        assertEquals(expResult, result);
+        
+          
+    }
+    
+     
+    
+    
 }
