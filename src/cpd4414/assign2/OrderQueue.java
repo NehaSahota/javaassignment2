@@ -33,7 +33,7 @@ public class OrderQueue {
             throw new custDoesNotExistsException("The customer does not exists");
         }
         if (order.getListOfPurchases().isEmpty()) {
-            throw new purchaseDoesNotExistsException("The list or purchase does not exixts");
+            throw new purchaseDoesNotExistsException("The list or purchase does not exists");
         }
 
         orderQueue.add(order);
@@ -52,9 +52,9 @@ public class OrderQueue {
 
         }
         for (Purchase product : order.getListOfPurchases()) {
-            int inventoryProdID = Inventory.getQuantityForId(product.getProductId());
-            int orderProdID = product.getQuantity();
-            if (orderProdID > inventoryProdID) {
+            int inventoryProdIDQuantity = Inventory.getQuantityForId(product.getProductId());
+            int orderProdIDQuantity = product.getQuantity();
+            if (orderProdIDQuantity > inventoryProdIDQuantity) {
                 throw new outOfStockException("The product is out of stock");
 
             }
