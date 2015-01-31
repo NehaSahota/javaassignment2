@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package cpd4414.assign2;
 
 import java.util.ArrayDeque;
@@ -25,17 +24,42 @@ import java.util.Queue;
  * @author Len Payne <len.payne@lambtoncollege.ca>
  */
 public class OrderQueue {
+
     Queue<Order> orderQueue = new ArrayDeque<>();
-    
+
     public void add(Order order) throws Exception {
-        if(order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()){
-        throw new Exception("The customer does not exixts");
+        if (order.getCustomerId().isEmpty() && order.getCustomerName().isEmpty()) {
+            throw new custDoesNotExistsException("The customer does not exists");
         }
-        if(order.getListOfPurchases().isEmpty()){
-        throw new Exception("The list or purchase does not exixts");
+        if (order.getListOfPurchases().isEmpty()) {
+            throw new purchaseDoesNotExistsException("The list or purchase does not exixts");
         }
-            
+
         orderQueue.add(order);
         order.setTimeReceived(new Date());
     }
+
+    public Order nextOrder() {
+        return orderQueue.element();
+
+    }
+
+//    public void processOrder(Order order) throws Exception {
+//
+//        if (order.getTimeReceived() == null) {
+//            throw new Exception("The order does not have time recieved ");
+//
+//        }
+//        
+//        else{
+//            for(Purchase product : order.getListOfPurchases()){
+//                int inventoryProdID = Inventory.getQuantityForId(product.getProductId());
+//                int orderProdID = product.getQuantity();
+//                if(inventoryProdID>)
+//                
+//            
+//            }
+//        }
+//
+//    }
 }
