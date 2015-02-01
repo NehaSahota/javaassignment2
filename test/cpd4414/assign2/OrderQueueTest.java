@@ -148,13 +148,14 @@ public class OrderQueueTest {
     }
     
     @Test
-    public void testWhenOrderDoesNotHaveGetTimeProcessed() throws Exception {
+    public void testWhenOrderDoesNotHaveTimeProcessed() throws Exception {
         OrderQueue orderQueue = new OrderQueue();
         Boolean thrown = false;
         Order order = new Order("CUST00001", "ABC Construction");
         order.addPurchase(new Purchase(11, 4));
         order.addPurchase(new Purchase(12, 2));
         orderQueue.add(order);
+//        orderQueue.processOrder(order);
         try{
             orderQueue.fulfill(order);
         }
@@ -166,6 +167,40 @@ public class OrderQueueTest {
         assertTrue(thrown);
 
     }
-     
+    
+    @Test
+    public void testWhenOrderDoesNotHaveTimeReceived() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        Boolean thrown = false;
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase(11, 4));
+        order.addPurchase(new Purchase(12, 2));
+
+        try{
+            orderQueue.fulfill(order);
+        }
+        
+        catch(getTimeReceivedNullException ex){
+            thrown = true;
+        }
+       
+        assertTrue(thrown);
+
+    }
+        @Test
+    public void testWhenOrderHasTimeFulfilledAndTimeProcessed() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        Boolean thrown = false;
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase(11, 4));
+        order.addPurchase(new Purchase(12, 2));
+        orderQueue.add(order);
+        orderQueue.processOrder(order);
+         orderQueue.fulfill(order);
+      
+       Date expResult=new Date();
+       Date result=order.getTimeFulfilled();
+        assertEquals(expResult, result);
+    }
 
 }

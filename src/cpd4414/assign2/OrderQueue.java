@@ -69,12 +69,13 @@ public class OrderQueue {
 
     public void fulfill(Order order) throws Exception {
 
+
+        if (order.getTimeReceived() == null) {
+            throw new getTimeReceivedNullException("The time received  is null");
+
+        }        
         if (order.getTimeProcessed() == null) {
             throw new getTimeProcessedNullException("The time processed is null");
-        }
-        if (order.getTimeReceived() == null) {
-            throw new getTimeReceivedNullException("The time processed is null");
-
         }
         order.setTimeFulfilled(new Date());
     }
