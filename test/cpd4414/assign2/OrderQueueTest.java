@@ -196,11 +196,15 @@ public class OrderQueueTest {
         order.addPurchase(new Purchase(12, 2));
         orderQueue.add(order);
         orderQueue.processOrder(order);
-         orderQueue.fulfill(order);
+        orderQueue.fulfill(order);
       
        Date expResult=new Date();
        Date result=order.getTimeFulfilled();
-        assertEquals(expResult, result);
+       assertEquals(expResult, result);
     }
-
+    
+    
+    
+    
+    
 }

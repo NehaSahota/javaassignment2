@@ -82,11 +82,9 @@ public class OrderQueue {
             if (orderProdIDQuantity > inventoryProdIDQuantity) {
                 throw new outOfStockException("The product is out of stock");
 
-                
             }
 
         }
-        
 
         order.setTimeFulfilled(new Date());
     }
