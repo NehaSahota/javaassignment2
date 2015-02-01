@@ -21,7 +21,7 @@ import java.util.Queue;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author <Neha>
  */
 public class OrderQueue {
 
@@ -66,4 +66,17 @@ public class OrderQueue {
         processQueue.add(order);
 
     }
+
+    public void fulfill(Order order) throws Exception {
+
+        if (order.getTimeProcessed() == null) {
+            throw new getTimeProcessedNullException("The time processed is null");
+        }
+        if (order.getTimeReceived() == null) {
+            throw new getTimeReceivedNullException("The time processed is null");
+
+        }
+        order.setTimeFulfilled(new Date());
+    }
+
 }

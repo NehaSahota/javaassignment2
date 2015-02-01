@@ -29,7 +29,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Len Payne <len.payne@lambtoncollege.ca>
+ * @author <Neha>
  */
 public class OrderQueueTest {
 
@@ -146,5 +146,26 @@ public class OrderQueueTest {
         assertEquals(expResult, result);
 
     }
+    
+    @Test
+    public void testWhenOrderDoesNotHaveGetTimeProcessed() throws Exception {
+        OrderQueue orderQueue = new OrderQueue();
+        Boolean thrown = false;
+        Order order = new Order("CUST00001", "ABC Construction");
+        order.addPurchase(new Purchase(11, 4));
+        order.addPurchase(new Purchase(12, 2));
+        orderQueue.add(order);
+        try{
+            orderQueue.fulfill(order);
+        }
+        
+        catch(getTimeProcessedNullException ex){
+            thrown = true;
+        }
+       
+        assertTrue(thrown);
+
+    }
+     
 
 }
