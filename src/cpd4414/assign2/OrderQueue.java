@@ -48,7 +48,7 @@ public class OrderQueue {
     public void processOrder(Order order) throws Exception {
 
         if (order.getTimeReceived() == null) {
-            throw new Exception("The order does not have time recieved ");
+            throw new getTimeReceivedNullException("The order does not have time recieved ");
 
         }
         for (Purchase product : order.getListOfPurchases()) {
@@ -69,14 +69,24 @@ public class OrderQueue {
 
     public void fulfill(Order order) throws Exception {
 
-
         if (order.getTimeReceived() == null) {
             throw new getTimeReceivedNullException("The time received  is null");
 
-        }        
+        }
         if (order.getTimeProcessed() == null) {
             throw new getTimeProcessedNullException("The time processed is null");
         }
+        for (Purchase product : order.getListOfPurchases()) {
+            int inventoryProdIDQuantity = Inventory.getQuantityForId(product.getProductId());
+            int orderProdIDQuantity = product.getQuantity();
+            if (orderProdIDQuantity > inventoryProdIDQuantity) {
+                throw new outOfStockException("The product is out of stock");
+
+            }
+
+        }
+        
+
         order.setTimeFulfilled(new Date());
     }
 
